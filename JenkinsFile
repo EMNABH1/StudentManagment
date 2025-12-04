@@ -1,1 +1,58 @@
-
+pipeline {
+    agent any  // Exécute sur n'importe quel agent Jenkins
+    
+    tools {
+        maven 'M2_HOME'  // Utilise Maven configuré dans Jenkins
+        jdk 'JAVA_HOME'  // Utilise Java configuré dans Jenkins
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                echo '📥 Récupération du code...'
+                checkout scm
+            }
+        }
+        
+        stage('Clean') {
+            steps {
+                echo '🧹 Nettoyage...'
+                sh 'mvn clean'
+            }
+        }
+      
+        stage('Compile') {
+            steps {
+                echo '⚙️ Compilation...'
+                sh 'mvn compile'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo '🧪 Exécution des tests...'
+                sh 'mvn test'
+            }
+        }
+        
+        stage('Package') {
+            steps {
+                echo '📦 Création du fichier JAR...'
+                sh 'mvn package'
+                echo '✅ JAR créé dans target/'
+                sh 'ls -lh target/*.jar'  
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo '🎉 Build réussi !'
+            archiveArtifacts artifacts: '**/target/*.jar', 
+                           fingerprint: true
+        }
+        failure {
+            echo '❌ Build échoué !'
+        }
+    }
+}
