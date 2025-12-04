@@ -9,35 +9,35 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo '📥 Récupération du code...'
+                echo 'Récupération du code...'
                 checkout scm
             }
         }
         
         stage('Clean') {
             steps {
-                echo '🧹 Nettoyage...'
+                echo 'Nettoyage...'
                 sh 'mvn clean'
             }
         }
         
         stage('Compile') {
             steps {
-                echo '⚙️ Compilation...'
+                echo ' Compilation...'
                 sh 'mvn compile'
             }
         }
         
         stage('Test') {
             steps {
-                echo '🧪 Tests...'
+                echo ' Tests...'
                 sh 'mvn test'
             }
         }
         
         stage('Package') {
             steps {
-                echo '📦 Création du JAR...'
+                echo ' Création du JAR...'
                 sh 'mvn package'
             }
         }
@@ -45,11 +45,11 @@ pipeline {
     
     post {
         success {
-            echo '✅ Build réussi !'
+            echo 'Build réussi !'
             archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
         }
         failure {
-            echo '❌ Build échoué !'
+            echo 'Build échoué !'
         }
     }
 }
