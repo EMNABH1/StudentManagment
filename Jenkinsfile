@@ -16,7 +16,7 @@ pipeline {
 stage('Compile') {
             steps {
                 echo ' Compilation...'
-                dir('student-managment'){
+                dir('student-management'){
                 sh 'mvn compile'
                 }
             }
