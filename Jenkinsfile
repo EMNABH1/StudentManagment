@@ -13,6 +13,14 @@ pipeline {
                 checkout scm
             }
         }
+stage('Compile') {
+            steps {
+                echo ' Compilation...'
+                sh 'mvn compile'
+            }
+        }
+        
+
         
         
     }
