@@ -5,7 +5,7 @@ pipeline {
         maven 'M2_HOME'
         jdk 'JAVA_HOME'
     }
-    
+    stages {
         stage('Checkout') {
             steps {
                 echo 'Récupération du code...'
@@ -13,4 +13,5 @@ pipeline {
             }
         }
         
+}
 }
