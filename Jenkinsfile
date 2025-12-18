@@ -2,19 +2,17 @@ pipeline {
     agent any
     
     stages {
-        stage('📥 Checkout') {
+        stage('Checkout') {
             steps {
-                echo '📥 Récupération du code...'
                 checkout scm
             }
         }
         
-        stage('🔨 Compile') {
+        stage('Debug') {
             steps {
-                echo '🔨 Compilation...'
-                dir('StudentManagment/student-management') {
-                    sh '/opt/maven/bin/mvn clean compile'
-                }
+                sh 'pwd'
+                sh 'ls -la'
+                sh 'find . -name "pom.xml"'
             }
         }
     }
