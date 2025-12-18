@@ -1,29 +1,21 @@
 pipeline {
     agent any
     
-    tools {
-        maven 'M2_HOME'
-        jdk 'JAVA_HOME'
-    }
-    
     stages {
-        stage('Checkout') {
+        stage('📥 Checkout') {
             steps {
-                echo 'Récupération du code...'
+                echo '📥 Récupération du code...'
                 checkout scm
             }
         }
-stage('Compile') {
+        
+        stage('🔨 Compile') {
             steps {
-                echo ' Compilation...'
-                dir('student-management'){
-                sh 'mvn compile'
+                echo '🔨 Compilation...'
+                dir('StudentManagment/student-management') {
+                    sh '/opt/maven/bin/mvn clean compile'
                 }
             }
         }
-        
-
-        
-        
     }
 }
